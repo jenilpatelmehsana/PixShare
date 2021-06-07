@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 require('dotenv').config({ encoding: 'latin1' })
 
-const connectDB = async () => {
+async function connectDB() {
+  var conn = null;
   try {
-    const conn = await mongoose.connect(process.env.DATABASE_URI, {
+     conn = await mongoose.connect(process.env.DATABASE_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
@@ -13,5 +14,6 @@ const connectDB = async () => {
     console.error(err);
     process.exit(1);
   }
+  return conn;
 };
 module.exports = connectDB;

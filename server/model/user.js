@@ -1,5 +1,5 @@
+const { ObjectID } = require('bson');
 const mongoose = require('mongoose')
-const register = require('../routes/auth/regiseter');
 const postSchema = require('./post');
 
 const userSchema = mongoose.Schema({
@@ -23,23 +23,30 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    posts: {
-        type: [postSchema]
+    followers: {
+        type: [mongoose.ObjectId],
+        required: true,
+        default: null
     },
     following: {
-        type: [userSchema],
+        type: [mongoose.ObjectId],
+        required: true,
         default: null
     },
-    follower: {
-        type: [user],
-        default: null
+    posts: {
+        type: [postSchema]
     },
     phone: {
         type: Number,
         required: false
+    },
+    profilePicture: {
+        type: Buffer,
+        required: false
     }
 })
 
-userSchema.token = register.genreateToken();
+const User = mongoose.model("User", userSchema)
 
-module.exports = userSchema;
+module.exports = User;
+module.exports.userSchema = userSchema;
