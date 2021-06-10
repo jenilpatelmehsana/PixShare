@@ -37,6 +37,8 @@ router.post('/register', urlencodedbody, async (req, res) => {
         userName: "",
         email: "",
         password: "",
+        registrationDate: Date.now(),
+        tokenRefreshDate: Date.now(),
         token: generateToken()
     })
     const email = body.email;
@@ -74,7 +76,7 @@ router.post('/register', urlencodedbody, async (req, res) => {
     }).catch((err) => {
         res.send({
             success: false,
-            error: "email already exist" + err.code,
+            error: "email already exist",
             user: null
         })
         return;
