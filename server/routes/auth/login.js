@@ -13,8 +13,10 @@ const urlencodedbody = bodyParser.urlencoded({ extended: false });
 router.post('/login', urlencodedbody, async (req, res) => {
     const body = req.body;
     const email = body.email;
-    const password = body.password;
-    if(validator.validate(email) === false) {
+    // const password = body.password;
+    const password = "hello you"
+    console.log(body);
+    if(validator.validate(email) == false) {
         res.json({
             status: "error",
             error: "invalid email"

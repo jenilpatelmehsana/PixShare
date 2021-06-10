@@ -4,6 +4,7 @@ const connectDB = require('./config/db')
 const { register }  = require('./routes/auth/regiseter')
 const { login } = require('./routes/auth/login')
 const { profileUpload } = require('./routes/uploads/profilePic')
+const { test } = require('./routes/testing')
 const app = express();
 
 //.env config
@@ -16,6 +17,7 @@ connectDB();
 app.use('/', register);
 app.use('/', login);
 app.use('/', profileUpload)
+app.use('/', test)
 
 const PORT = process.env.PORT || 3000;
 
