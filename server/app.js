@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require("dotenv");
 const connectDB = require('./config/db')
+const mongoose = require('mongoose')
 const { register }  = require('./routes/auth/regiseter')
 const { login } = require('./routes/auth/login')
 const { profileUpload } = require('./routes/uploads/profilePic')
@@ -10,6 +11,7 @@ const app = express();
 dotenv.config({ path: "./config/config.env" });
 
 //database connection
+mongoose.set('useFindAndModify', false);
 connectDB();
 
 
