@@ -6,10 +6,12 @@ const router = express.Router()
 const User = require('./../../model/user')
 const bodyParser = require('body-parser')
 const urlencodedbody = bodyParser.urlencoded({ extended: false });
+var filePath;
 const storage = multer.diskStorage({
     destination: "Misc/profileUploads/",
     filename: (req, file, cb) => {
         cb(null, path.basename(file.originalname))
+        filePath = path.basename(file.originalname);
     }
 })
 const upload = multer({ 
@@ -31,16 +33,19 @@ async function addImageToDatabase(email, token) {
     const query = {
         email: email
     }
+    filePath =  `.\\..\\server\\Misc\\profileUploads\\${filePath}`;
+    console.log(filePath);
     const update = {
         profilePicture: { 
-            data : fs.readFileSync( ".\\..\\server\\Misc\\profileUploads\\20210526_193044.jpg"),
-            contentType: 'image/jpg'
+            data : fs.readFileSync(filePath),
         }
     }
     console.log('ok');
     await User.findOneAndUpdate(query, update, {new: true}, (err, doc) => {
         if(err !== null) {
             console.log(err.message);
+        } else {
+
         }
         console.log(doc);
     })

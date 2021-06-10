@@ -18,33 +18,43 @@ router.post('/login', urlencodedbody, async (req, res) => {
     console.log(body);
     if(validator.validate(email) == false) {
         res.json({
-            status: "error",
-            error: "invalid email"
+            success: false,
+            error: "invalid email",
+            user: null
         })
         return;
     }
     var user = await User.findOne({ email: email }).exec();
     if(user === null) {
         res.json({
-            status: "error",
-            error: "no user found"
+            success: false,
+            error: "no user found",
+            user: null
         })
         return;
     }
     if(user.password !== password) {
         res.json({
-            status: "error",
-            error: "wrong password"
+            success: false,
+            error: "wrong password",
+            user: null
         })
         return;
     }
     if(user.token === null) {
         //must be found
-        res.sendStatus(500);
-        console.log(`${user.email} token not found`);
+        res.json({
+            success: false,
+            error: "contact authorization",
+            user: null
+        });
         return;
     }
-    res.send(user)
+    res.json({
+        success: true,
+        error: null,
+        user: user
+    });
 })
 
 module.exports.login = router;
