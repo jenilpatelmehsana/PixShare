@@ -26,34 +26,6 @@ const upload = multer({
 
 // endpoint methods
 
-async function addImageToDatabase(email, token) {
-    var user = await User.findOne({
-        email: email
-    }).exec();
-    if(user.token != token) {
-        return false;
-    }
-    const query = {
-        email: email
-    }
-    filePath =  `.\\..\\server\\Misc\\profileUploads\\${filePath}`;
-    console.log(filePath);
-    const update = {
-        profilePicture: { 
-            data : fs.readFileSync(filePath),
-        }
-    }
-    await User.findOneAndUpdate(query, update, {new: true}, (err, doc) => {
-        if(err !== null) {
-            console.log(err.message);
-        } else {
-
-        }
-        console.log(doc);
-    })
-}
-
-
 router.post('/profilePicUpload', urlencodedbody, upload.single('avatar'), async (req, res, next) => {
     // req.file is the `avatar` file
     // req.body will hold the text fields, if there were any
@@ -93,6 +65,14 @@ router.post('/profilePicUpload', urlencodedbody, upload.single('avatar'), async 
 
     const query = {
         email: email
+    }
+    if(filePath === undefined) {
+        res.json({
+            success: false,
+            error: undefined,
+            user: null
+        })
+        return
     }
     filePath =  `.\\..\\server\\Misc\\profileUploads\\${filePath}`;
     const update = {

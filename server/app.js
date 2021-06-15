@@ -4,6 +4,7 @@ const connectDB = require('./config/db')
 const mongoose = require('mongoose')
 const { register }  = require('./routes/auth/regiseter')
 const { login } = require('./routes/auth/login')
+const { postUpload } = require('./routes/uploads/uploadPost')
 const { profileUpload } = require('./routes/uploads/profilePic')
 const app = express();
 
@@ -18,6 +19,7 @@ connectDB();
 app.use('/', register);
 app.use('/', login);
 app.use('/', profileUpload)
+app.use('/', postUpload)
 
 const PORT = process.env.PORT || 3000;
 
