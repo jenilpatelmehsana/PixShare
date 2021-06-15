@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const userSchema = require('./user')
 
 const postSchema = mongoose.Schema({
+    postId: {
+        type: Number,
+        required: true
+    },
     data: {
         before: {
             type: Buffer,
@@ -18,22 +22,31 @@ const postSchema = mongoose.Schema({
         default: Date.now
     },
     owner: {
-        type: userSchema,
+        type: mongoose.ObjectId,
         require: true
     },
     likes: {
-        type: Number,
-        required: true,
-        default: 0
+        likers: {
+            type: [mongoose.ObjectId],
+            default: null
+        },
+        likeCount: {
+            type: Number,
+            default: 0
+        }
     },
     comments: {
-        type: Number,
-        required: true,
-        default: 0
+        commenters: {
+            type: [mongoose.ObjectId],
+            default: null
+        },
+        commentCount: {
+            type: Number,
+            default:0
+        }
     },
     reports: {
         type: Number,
-        required: true,
         default: 0
     }
 })

@@ -15,7 +15,7 @@ router.post('/login', urlencodedbody, async (req, res) => {
     const email = body.email;
     // const password = body.password;
     const password = "hello you"
-    console.log(body);
+    console.log(req.body);
     if(validator.validate(email) == false) {
         res.json({
             success: false,
@@ -33,7 +33,7 @@ router.post('/login', urlencodedbody, async (req, res) => {
         })
         return;
     }
-    if(user.password !== password) {
+    if(String.toString(user.password) !== String.toString(password)) {
         res.json({
             success: false,
             error: "wrong password",
@@ -50,6 +50,9 @@ router.post('/login', urlencodedbody, async (req, res) => {
         });
         return;
     }
+    user.following.data = null;
+    user.followers.data = null;
+    user.posts.data = null;
     res.json({
         success: true,
         error: null,

@@ -24,17 +24,37 @@ const userSchema = mongoose.Schema({
         unique: true
     },
     followers: {
-        type: [mongoose.ObjectId],
-        required: true,
-        default: null
+        data: {
+            type: [mongoose.ObjectId],
+            required: true,
+            default: null,
+        },
+        followerCount: {
+            type: Number,
+            default: 0
+        }
     },
     following: {
-        type: [mongoose.ObjectId],
-        required: true,
-        default: null
+        data: {
+            type: [mongoose.ObjectId],
+            required: true,
+            default: null,
+        },
+        followingCount: {
+            type: Number,
+            default: 0
+        }
     },
     posts: {
-        type: [postSchema]
+        data: {
+            type: [mongoose.ObjectId],
+            required: true,
+            default: null,
+        },
+        postCount: {
+            type: Number,
+            default: 0
+        }
     },
     phone: {
         type: Number,
