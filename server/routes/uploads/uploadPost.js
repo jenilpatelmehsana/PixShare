@@ -35,6 +35,31 @@ const upload = multer({
     // }
 })
 
+// adding post to user
+
+function addPostToUser(postId, user) {
+    User.findOneAndUpdate(
+        {
+            email: user.email
+        },
+        {
+            $push: {
+                "posts.data" : postId
+            },
+            $inc: {
+                "posts.postCount    ": 1
+            }
+        },
+        (err, obj) => {
+            if(err) {
+                console.log(err);
+            }
+        }
+    )
+}
+
+// uploading post
+
 router.post('/uploadPost', urlencodedbody, upload.array('post', 2) ,async (req, res) => {
     const body = req.body;
     const email = body.email;
@@ -91,6 +116,10 @@ router.post('/uploadPost', urlencodedbody, upload.array('post', 2) ,async (req, 
             error: null,
             post: null
         })
+        // add to user
+        
+        addPostToUser(obj._id, user)
+        
     }).catch((err) => {
         res.json({
             success: false,
@@ -99,7 +128,6 @@ router.post('/uploadPost', urlencodedbody, upload.array('post', 2) ,async (req, 
         })
     })
     return
-
 
 })
 
