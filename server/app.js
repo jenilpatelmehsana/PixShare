@@ -4,8 +4,10 @@ const connectDB = require('./config/db')
 const mongoose = require('mongoose')
 const { register }  = require('./routes/auth/regiseter')
 const { login } = require('./routes/auth/login')
+const { like } = require('./routes/postUtils/like');
 const { postUpload } = require('./routes/uploads/uploadPost')
-const { profileUpload } = require('./routes/uploads/profilePic')
+const { profileUpload } = require('./routes/uploads/profilePic');
+const { comment } = require('./routes/postUtils/comment');
 const app = express();
 
 //.env config
@@ -20,6 +22,8 @@ app.use('/', register);
 app.use('/', login);
 app.use('/', profileUpload)
 app.use('/', postUpload)
+app.use('/', like)
+app.use('/', comment)
 
 const PORT = process.env.PORT || 3000;
 

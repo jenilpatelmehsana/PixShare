@@ -81,7 +81,7 @@ router.post('/profilePicUpload', urlencodedbody, upload.single('avatar'), async 
         }
     }
 
-    await User.findOneAndUpdate(query, update, {new: true}).then((doc) => {
+    User.findOneAndUpdate(query, update, {new: true}).then((doc) => {
         res.json({
             success: true,
             error: null,
