@@ -105,3 +105,9 @@ router.post('/comment', urlencodedbody, async(req, res) => {
 })
 
 module.exports.comment = router
+
+
+/*
+--> yet to implement likes on comment
+--> delete comment
+*/

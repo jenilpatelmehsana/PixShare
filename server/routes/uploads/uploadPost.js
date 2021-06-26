@@ -6,6 +6,7 @@ const router = express.Router()
 const bodyParser = require('body-parser')
 const User = require('./../../model/user')
 const Post = require('./../../model/post')
+const addToTimeline = require('../timeline/timeline')
 const urlencodedbody = bodyParser.urlencoded({ extended: false });
 const maxFileSize = 5000000
 
@@ -106,11 +107,18 @@ router.post('/uploadPost', urlencodedbody, upload.array('post', 2) ,async (req, 
             before: fs.readFileSync(filePath1),
             after: fs.readFileSync(filePath2)
         },
-        postingTime: Date.now(),
         owner: user._id
     })
 
-    newPost.save().then((obj) => {
+    // delete stored files
+    try {
+        fs.unlinkSync(filePath1)
+        fs.unlinkSync(filePath2)
+    } catch (err) {
+        console.log(err);
+    }
+
+    await newPost.save().then((obj) => {
         res.json({
             success: true,
             error: null,
@@ -119,6 +127,7 @@ router.post('/uploadPost', urlencodedbody, upload.array('post', 2) ,async (req, 
         // add to user
         
         addPostToUser(obj._id, user)
+        addToTimeline(obj, user)
         
     }).catch((err) => {
         res.json({

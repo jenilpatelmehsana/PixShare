@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const userSchema = require('./user')
 
 const postSchema = mongoose.Schema({
     postId: {
