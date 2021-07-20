@@ -15,7 +15,7 @@ function generateCommentID(userName, postId) {
 }
 
 
-router.post('/comment', urlencodedbody, async(req, res) => {
+router.put('/comment', urlencodedbody, async(req, res) => {
     const body = req.body
     const email = body.email
     const token = body.token

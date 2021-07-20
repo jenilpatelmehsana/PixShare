@@ -26,7 +26,7 @@ const upload = multer({
 
 // endpoint methods
 
-router.post('/profilePicUpload', urlencodedbody, upload.single('avatar'), async (req, res, next) => {
+router.put('/profilePicUpload', urlencodedbody, upload.single('avatar'), async (req, res, next) => {
     // req.file is the `avatar` file
     // req.body will hold the text fields, if there were any
     const email = req.body.email;

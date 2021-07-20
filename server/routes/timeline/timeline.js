@@ -4,7 +4,8 @@ function addToTimeline(post, user) {
     var newTimelineItem = new Timeline({
         postingDate: post.postingTime,
         postID: post._id,
-        owner: user._id
+        owner: user._id,
+        ownerEmail: user.email
     })
     newTimelineItem.save().then((obj) => {
         // create another service that sorts data

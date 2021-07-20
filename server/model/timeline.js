@@ -12,6 +12,10 @@ const timelineSchema = mongoose.Schema({
     owner: {
         type: mongoose.ObjectId,
         required: true
+    },
+    ownerEmail: {
+        type: String,
+        required: true
     }
 })
 

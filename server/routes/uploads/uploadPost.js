@@ -31,9 +31,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
     storage: storage,
-    // limits: {
-    //     fileSize: maxFileSize
-    // }
+    limits: {
+        fileSize: maxFileSize
+    }
 })
 
 // adding post to user
@@ -61,7 +61,7 @@ function addPostToUser(postId, user) {
 
 // uploading post
 
-router.post('/uploadPost', urlencodedbody, upload.array('post', 2) ,async (req, res) => {
+router.put('/uploadPost', urlencodedbody, upload.array('post', 2) ,async (req, res) => {
     const body = req.body;
     const email = body.email;
     const token = body.token;

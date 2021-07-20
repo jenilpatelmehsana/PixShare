@@ -61,7 +61,7 @@ const userSchema = mongoose.Schema({
         required: false
     },
     profilePicture: {
-        data: Buffer,
+        data: Buffer
     },
     registrationDate: {
         type: Date,

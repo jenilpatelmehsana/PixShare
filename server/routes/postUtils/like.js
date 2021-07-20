@@ -5,7 +5,7 @@ const urlencodedbody = bodyParser.urlencoded({ extended: false });
 const User = require('../../model/user')
 const router = express.Router()
 
-router.post('/like', urlencodedbody, async (req, res) => {
+router.put('/like', urlencodedbody, async (req, res) => {
     const body = req.body
     const email = body.email
     const token = body.token
