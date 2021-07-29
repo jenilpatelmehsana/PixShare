@@ -10,6 +10,8 @@ const { profileUpload } = require('./routes/uploads/profilePic');
 const { comment } = require('./routes/postUtils/comment');
 const bodyParser = require('body-parser');
 const { getTimeline } = require('./routes/timeline/getTimeline');
+const { follow } = require('./routes/follow/follow');
+const { getFollowers } = require('./routes/follow/getFollowers');
 const app = express();
 
 //.env config
@@ -28,6 +30,8 @@ app.use('/', postUpload)
 app.use('/', like)
 app.use('/', comment)
 app.use('/', getTimeline)
+app.use('/', follow)
+app.use('/', getFollowers)
 
 const PORT = process.env.PORT || 3000;
 
