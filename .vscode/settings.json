@@ -1,4 +1,5 @@
 {
     "editor.fontSize": 16,
-    "prettier.enable": true
+    "prettier.enable": true,
+    "editor.formatOnSave": true
 }

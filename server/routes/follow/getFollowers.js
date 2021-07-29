@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../../model/user');
 const router = express.Router()
 
+
 router.get('/getFollowers', async (req, res) => {
     const email = req.query.email;
     const token = req.query.token;

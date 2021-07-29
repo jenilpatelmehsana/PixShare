@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const { getTimeline } = require('./routes/timeline/getTimeline');
 const { follow } = require('./routes/follow/follow');
 const { getFollowers } = require('./routes/follow/getFollowers');
+const { getUserById } = require('./routes/follow/getUser');
 const app = express();
 
 //.env config
@@ -32,6 +33,7 @@ app.use('/', comment)
 app.use('/', getTimeline)
 app.use('/', follow)
 app.use('/', getFollowers)
+app.use('/', getUserById)
 
 const PORT = process.env.PORT || 3000;
 
